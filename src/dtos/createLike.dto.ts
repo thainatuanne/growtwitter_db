@@ -6,5 +6,5 @@ export interface CreateLikeDTO {
 export interface UpdateLikeDTO {
     id: number;
     usuarioId?: number;
-    tweetId: number;
+    tweetId?: number;
 }

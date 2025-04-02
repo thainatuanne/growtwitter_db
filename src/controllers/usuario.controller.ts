@@ -66,7 +66,12 @@ export class UsuarioController {
             if (!id || isNaN(Number(id))) {
                 throw new HTTPError(400, "ID inválido.");
             }
-            const { nome, email, senha, username } = req.body;
+            const {
+                nome,
+                email,
+                senha,
+                username
+            } = req.body;
 
             const dadosAtualizacao = {
                 id: Number(id),

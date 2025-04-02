@@ -45,7 +45,6 @@ export class TweetService {
                 replies: true,
                 likes: true,
             },
-
         });
 
         if (!listarPorId || listarPorId.length === 0) {
@@ -66,7 +65,6 @@ export class TweetService {
         })
 
         return novoTweet;
-
     }
 
     public async atualizar({ id, conteudo, tipo }: AtualizarTweetDTO): Promise<Tweet> {
