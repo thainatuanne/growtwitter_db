@@ -24,8 +24,8 @@ export class TweetController {
 
     public async listarPorId(req: Request, res: Response): Promise<void> {
         try {
-            const { usuarioId } = req.params;
-            const userId = Number(usuarioId);
+            const { id } = req.params;
+            const userId = Number(id);
             const service = new TweetService();
             const tweets = await service.listarPorId(userId);
 
@@ -38,6 +38,7 @@ export class TweetController {
             onError(error, res);
         }
     }
+
 
     public async cadastrar(req: AuthenticatedRequest, res: Response): Promise<void> {
         try {

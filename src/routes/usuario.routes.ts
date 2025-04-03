@@ -7,15 +7,15 @@ export class usuarioRoutes {
         const router = Router();
         const controller = new UsuarioController();
 
-        // rotas públicas
-        router.get("/usuarios", controller.listar);
-        router.get("/usuarios/:id", controller.buscarPorId);
-        router.post("/usuarios", controller.cadastrar);
+        // rotas públicas (já estão sob o prefixo /usuarios)
+        router.get("/", controller.listar);
+        router.get("/:id", controller.buscarPorId);
+        router.post("/", controller.cadastrar);
         router.post("/login", controller.login);
 
         // rotas protegidas
-        router.put("/usuarios/:id", authMiddleware, controller.atualizar);
-        router.delete("/usuarios/:id", authMiddleware, controller.excluir);
+        router.put("/:id", authMiddleware, controller.atualizar);
+        router.delete("/:id", authMiddleware, controller.excluir);
 
         return router;
     }

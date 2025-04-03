@@ -10,11 +10,11 @@ export class tweetRoutes {
         router.use(authMiddleware);
 
         // rotas protegidas:
-        router.get("/tweets", controller.listar);
-        router.get("/tweets/:id", controller.listarPorId);
-        router.post("/tweets", controller.cadastrar);
-        router.put("/tweets/:id", controller.atualizar);
-        router.delete("/tweets/:id", controller.deletar);
+        router.get("/", controller.listar);
+        router.get("/:id", controller.listarPorId);
+        router.post("/", controller.cadastrar);
+        router.put("/:id", controller.atualizar);
+        router.delete("/:id", controller.deletar);
 
         return router;
     }

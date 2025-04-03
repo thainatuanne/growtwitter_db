@@ -10,11 +10,11 @@ export class seguidorRoutes {
         router.use(authMiddleware);
 
         // rotas protegidas
-        router.get("/seguidores", controller.listar);
-        router.get("/seguidores/:id", controller.buscarPorId);
-        router.post("/seguidores", controller.cadastrar);
-        router.put("/seguidores/:id", controller.atualizar);
-        router.delete("/seguidores/:id", controller.deletar);
+        router.get("/", controller.listar);
+        router.get("/:id", controller.buscarPorId);
+        router.post("/", controller.cadastrar);
+        router.put("/:id", controller.atualizar);
+        router.delete("/:id", controller.deletar);
 
         return router;
     }

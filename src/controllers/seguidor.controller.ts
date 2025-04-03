@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { SeguidorService } from "../services/seguidor.service";
 import { onError } from "../utils/on-error";
 import { HTTPError } from "../utils/http.error";
+import { prismaClient } from "../database/prismaClient";
 
 interface AuthenticatedRequest extends Request {
     userId?: number;
@@ -48,11 +49,22 @@ export class SeguidorController {
             if (!usuarioId) {
                 throw new HTTPError(401, "Usuário não autenticado.");
             }
+
             const service = new SeguidorService();
             const novaRelacao = await service.cadastrar({ usuarioId, seguidorId });
+            const usuario = await prismaClient.usuario.findUnique({
+                where: {
+                    id: usuarioId
+                }
+            });
+            const seguido = await prismaClient.usuario.findUnique({
+                where: {
+                    id: seguidorId
+                }
+            });
             res.status(201).json({
                 sucesso: true,
-                mensagem: "Usuário passou a seguir com sucesso",
+                mensagem: `${usuario?.nome} passou a seguir ${seguido?.nome} com sucesso!`,
                 dados: novaRelacao,
             });
         } catch (error) {
@@ -90,12 +102,28 @@ export class SeguidorController {
             if (!id || isNaN(Number(id))) {
                 throw new HTTPError(400, "ID inválido.");
             }
+
             const relacaoId = Number(id);
             const service = new SeguidorService();
             const deletado = await service.deletar(relacaoId);
+
+            const usuario = await prismaClient.usuario.findUnique({
+                where: {
+                    id: deletado.usuarioId
+                }
+            });
+
+            const seguido = await prismaClient.usuario.findUnique({
+                where: {
+                    id: deletado.seguidorId
+                }
+            });
+
+            const nomeUsuario = usuario?.nome || "Usuário";
+            const nomeSeguidor = seguido?.nome || "Seguidor";
             res.status(200).json({
                 sucesso: true,
-                mensagem: "Relação de seguidor excluída com sucesso",
+                mensagem: `${nomeUsuario} deixou de seguir ${nomeSeguidor} com sucesso.`,
                 dados: deletado,
             });
         } catch (error) {

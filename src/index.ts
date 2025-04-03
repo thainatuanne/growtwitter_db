@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import { envs } from "./envs";
 import { usuarioRoutes } from "./routes/usuario.routes";
 import { tweetRoutes } from "./routes/tweet.routes";
 import { likeRoutes } from "./routes/like.routes";
@@ -24,7 +25,7 @@ app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
     onError(err, res);
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = envs.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });

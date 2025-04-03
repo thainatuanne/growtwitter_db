@@ -10,11 +10,11 @@ export class likeRoutes {
         router.use(authMiddleware);
 
         // rotas protegidas:
-        router.get("/likes", controller.listar);
-        router.get("/likes/:id", controller.buscarPorId);
-        router.post("/likes", controller.cadastrar);
-        router.put("/likes/:id", controller.atualizar);
-        router.delete("/likes/:id", controller.deletar);
+        router.get("/", controller.listar);
+        router.get("/:id", controller.buscarPorId);
+        router.post("/", controller.cadastrar);
+        router.put("/:id", controller.atualizar);
+        router.delete("/:id", controller.deletar);
 
         return router;
     }
