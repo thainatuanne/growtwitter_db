@@ -25,7 +25,7 @@ app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
     onError(err, res);
 });
 
-const PORT = envs.PORT || 3000;
+const PORT = Number(envs.PORT) || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
