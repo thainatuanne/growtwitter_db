@@ -105,6 +105,13 @@ export class SeguidorController {
 
             const relacaoId = Number(id);
             const service = new SeguidorService();
+
+            const relacao = await service.buscarPorId(relacaoId);
+
+            if (relacao.usuarioId !== req.userId) {
+                throw new HTTPError(403, "Você não tem permissão para excluir esta relação.");
+            }
+
             const deletado = await service.deletar(relacaoId);
 
             const usuario = await prismaClient.usuario.findUnique({
@@ -121,6 +128,7 @@ export class SeguidorController {
 
             const nomeUsuario = usuario?.nome || "Usuário";
             const nomeSeguidor = seguido?.nome || "Seguidor";
+
             res.status(200).json({
                 sucesso: true,
                 mensagem: `${nomeUsuario} deixou de seguir ${nomeSeguidor} com sucesso.`,

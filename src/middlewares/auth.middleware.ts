@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { HTTPError } from "../utils/http.error";
+import { getJwtSecret } from "./getJwtSecret";
 
 export interface AuthenticatedRequest extends Request {
     userId?: number;
@@ -30,7 +31,7 @@ export const authMiddleware = (
 
         const decoded = jwt.verify(
             token,
-            process.env.JWT_SECRET || "minhaChaveSecreta"
+            getJwtSecret()
         ) as { id: number };
 
         req.userId = decoded.id;

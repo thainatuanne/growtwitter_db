@@ -95,8 +95,15 @@ export class LikeController {
             if (!id || isNaN(Number(id))) {
                 throw new HTTPError(400, "ID inválido.");
             }
+
             const likeId = Number(id);
             const service = new LikeService();
+
+            const like = await service.buscarPorId(likeId);
+            if (like.usuarioId !== req.userId) {
+                throw new HTTPError(403, "Você não tem permissão para excluir este like.");
+            }
+
             const likeDeletado = await service.deletar(likeId);
             res.status(200).json({
                 sucesso: true,

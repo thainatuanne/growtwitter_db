@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { HTTPError } from "../utils/http.error";
 import { CreateUsuarioDTO, UpdateUsuarioDTO, LoginUsuarioDTO } from "../dtos/createUsuario.dto";
+import { getJwtSecret } from "../middlewares/getJwtSecret";
 
 type UsuarioParcial = Omit<Usuario, "senha">;
 
@@ -58,10 +59,9 @@ export class UsuarioService {
             throw new HTTPError(401, "Senha inválida");
         }
 
-        //  token JWT 
         const token = jwt.sign(
             { id: usuario.id },
-            process.env.JWT_SECRET || "minhaChaveSecreta",
+            getJwtSecret(),
             { expiresIn: "1h" }
         );
 
