@@ -4,6 +4,9 @@ Este projeto é a API do **GrowTwitter**, uma aplicação inspirada no Twitter, 
 
 ---
 
+### 🔗 Acesse a API online:
+➡️ [https://growtwitter-db.onrender.com](https://growtwitter-db.onrender.com)
+
 ## 🚀 Tecnologias utilizadas
 
 - **Node.js**
@@ -44,3 +47,59 @@ Este projeto é a API do **GrowTwitter**, uma aplicação inspirada no Twitter, 
 - Listagem de quem segue quem
 - Excluir um seguidor (deixar de seguir)
 - Mensagens personalizadas no retorno (ex: “Ana deixou de seguir Carlos”)
+
+## 📫 Rotas da API
+
+### 🔹 Usuários
+
+| Método | Rota                  | Descrição                          |
+|--------|-----------------------|-------------------------------------|
+| POST   | `/usuarios/signup`    | Cadastro de novo usuário            |
+| POST   | `/usuarios/login`     | Login com username/email e senha    |
+| GET    | `/usuarios`           | Listar todos os usuários            |
+| GET    | `/usuarios/:id`       | Buscar usuário por ID               |
+| PUT    | `/usuarios/:id`       | Atualizar dados do usuário          |
+| DELETE | `/usuarios/:id`       | Deletar usuário                     |
+
+---
+
+### 🔹 Tweets
+
+| Método | Rota                  | Descrição                            |
+|--------|-----------------------|----------------------------------------|
+| POST   | `/tweets`             | Criar um novo tweet                    |
+| GET    | `/tweets`             | Listar todos os tweets                 |
+| GET    | `/tweets/:usuarioId`  | Listar tweets de um usuário específico|
+| PUT    | `/tweets/:id`         | Atualizar um tweet                     |
+| DELETE | `/tweets/:id`         | Deletar um tweet                       |
+
+---
+
+### 🔹 Likes
+
+| Método | Rota           | Descrição                        |
+|--------|----------------|----------------------------------|
+| POST   | `/likes`       | Curtir um tweet                  |
+| GET    | `/likes`       | Listar todos os likes            |
+| GET    | `/likes/:id`   | Buscar like por ID               |
+| PUT    | `/likes/:id`   | Atualizar like (opcional)        |
+| DELETE | `/likes/:id`   | Remover like (descurtir)         |
+
+---
+
+### 🔹 Seguidores
+
+| Método | Rota               | Descrição                                |
+|--------|--------------------|--------------------------------------------|
+| POST   | `/seguidores`      | Seguir um usuário                         |
+| GET    | `/seguidores`      | Listar todas as relações de seguidores    |
+| GET    | `/seguidores/:id`  | Buscar relação por ID                     |
+| PUT    | `/seguidores/:id`  | Atualizar relação de seguidor             |
+| DELETE | `/seguidores/:id`  | Deixar de seguir (remover relação)        |
+
+---
+
+## 🛡️ Autenticação
+
+- As rotas de **tweets**, **likes** e **seguidores** são protegidas com **JWT**.
+- Para acessar, envie o token no header da requisição.
