@@ -19,6 +19,10 @@ app.use("/usuarios", usuario_routes_1.usuarioRoutes.bind());
 app.use("/tweets", tweet_routes_1.tweetRoutes.bind());
 app.use("/likes", like_routes_1.likeRoutes.bind());
 app.use("/seguidores", seguidor_routes_1.seguidorRoutes.bind());
+// teste raiz
+app.get("/", (req, res) => {
+    res.send("GrowTwitter API está rodando! 🚀");
+});
 app.use((err, req, res, next) => {
     (0, on_error_1.onError)(err, res);
 });
