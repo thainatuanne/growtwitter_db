@@ -70,7 +70,8 @@ export class UsuarioController {
                 nome,
                 email,
                 senha,
-                username
+                username,
+                avatar,
             } = req.body;
 
             const dadosAtualizacao = {
@@ -79,6 +80,7 @@ export class UsuarioController {
                 email,
                 senha,
                 username,
+                avatar
             };
 
             const service = new UsuarioService();

@@ -11,7 +11,7 @@ type UsuarioParcial = Omit<Usuario, "senha">;
 export class UsuarioService {
     // cadastro
     public async cadastrar(dados: CreateUsuarioDTO): Promise<UsuarioParcial> {
-        const { nome, email, senha, username } = dados;
+        const { nome, email, senha, username, avatar } = dados;
 
         // verifica se já existe um usuário com o mesmo e-mail ou username
         const usuarioExistente = await prismaClient.usuario.findFirst({
@@ -31,7 +31,8 @@ export class UsuarioService {
                 nome,
                 email,
                 senha: senhaCriptografada,
-                username
+                username,
+                avatar
             },
         });
 
@@ -127,7 +128,7 @@ export class UsuarioService {
 
     // atualiza os dados do usuário pelo id
     public async atualizar(dados: UpdateUsuarioDTO): Promise<UsuarioParcial> {
-        const { id, nome, email, senha, username } = dados;
+        const { id, nome, email, senha, username, avatar } = dados;
 
         if (!nome && !email && !senha && !username) {
             throw new HTTPError(400, "Nenhum campo enviado para atualização.");
@@ -144,6 +145,7 @@ export class UsuarioService {
                 email,
                 username,
                 senha: senhaCriptografada,
+                avatar
             },
         });
 

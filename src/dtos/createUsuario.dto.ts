@@ -3,6 +3,7 @@ export interface CreateUsuarioDTO {
     email: string;
     senha: string;
     username: string;
+    avatar?: string;
 }
 
 export interface UpdateUsuarioDTO {
@@ -11,6 +12,7 @@ export interface UpdateUsuarioDTO {
     email?: string;
     senha?: string;
     username?: string;
+    avatar?: string;
 }
 
 export interface LoginUsuarioDTO {
